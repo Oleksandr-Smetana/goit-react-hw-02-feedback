@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 
 import Section from './components/Section/Section';
-import FeedbackOptions from './components/FeedbackOptions/FeedbackOptions';
-import Statistics from './components/Statistics/Statistics';
-import Notification from './components/Notification/Notification';
+import FeedbackOptions from './components/FeedbackOptions';
+import Statistics from './components/Statistics';
+import Notification from './components/Notification';
+import s from './App.module.css';
 
 class Feedback extends Component {
   state = {
@@ -29,16 +30,19 @@ class Feedback extends Component {
   //   });
   // };
 
+  // добавляет +1 отзыв в блок статистики по клике на кнопки
   leaveFeedback = name => {
     this.setState(prevState => ({
       [name]: prevState[name] + 1,
     }));
   };
 
+  // определяет общее количество отзывов
   getTotalFeedback = () => {
     return this.state.good + this.state.neutral + this.state.bad;
   };
 
+  // определяет процент положительных отзывов
   getPositiveFeedbackPercentage = () => {
     return Math.round((this.state.good / this.getTotalFeedback()) * 100);
   };
@@ -47,7 +51,7 @@ class Feedback extends Component {
     const { good, neutral, bad } = this.state;
 
     return (
-      <div className="container">
+      <div className={s.app}>
         <Section title="Please leave feedback">
           <FeedbackOptions
             options={this.state}
